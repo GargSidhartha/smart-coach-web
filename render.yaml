@@ -4,10 +4,12 @@ services:
     name: smart-coach-web
     env: python
     buildCommand: pip install -r requirements.txt && chmod +x startup.sh
-    startCommand: ./startup.sh && gunicorn wsgi:app
+    startCommand: ./startup.sh && gunicorn wsgi:app --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.0
+      - key: PORT
+        value: 10000
       - key: CLOUDAMQP_URL
         fromService:
           name: rabbitmq
