@@ -12,7 +12,7 @@ services:
         fromService:
           name: rabbitmq
           type: pserv
-          property: connectionString
+          envVarKey: RABBITMQ_URL
     
   # Background worker for Celery
   - type: worker
@@ -27,7 +27,7 @@ services:
         fromService:
           name: rabbitmq
           type: pserv
-          property: connectionString
+          envVarKey: RABBITMQ_URL
 
   # RabbitMQ service
   - type: pserv
@@ -35,3 +35,6 @@ services:
     plan: free
     repo: https://github.com/render-examples/rabbitmq
     env: docker
+    envVars:
+      - key: RABBITMQ_URL
+        sync: false
