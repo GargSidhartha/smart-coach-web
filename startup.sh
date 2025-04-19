@@ -17,7 +17,7 @@ if [ ! -f "models/best.pt" ]; then
   # For Dropbox:
   # curl -L "https://www.dropbox.com/s/YOUR_FILE_PATH?dl=1" -o models/best.pt
   
-  curl -L "YOUR_MODEL_DOWNLOAD_URL" -o models/best.pt
+  curl -L "https://drive.google.com/file/d/1O3n7SGI83vFJ50biXA5biEvaOvbmIIPD/view?usp=sharing" -o models/best.pt
   echo "Model download complete!"
 fi
 
