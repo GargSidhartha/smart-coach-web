@@ -1,0 +1,37 @@
+services:
+  # Web service
+  - type: web
+    name: smart-coach-web
+    env: python
+    buildCommand: pip install -r requirements.txt && chmod +x startup.sh
+    startCommand: ./startup.sh && gunicorn wsgi:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: CLOUDAMQP_URL
+        fromService:
+          name: rabbitmq
+          type: pserv
+          property: connectionString
+    
+  # Background worker for Celery
+  - type: worker
+    name: smart-coach-worker
+    env: python
+    buildCommand: pip install -r requirements.txt && chmod +x startup.sh
+    startCommand: ./startup.sh && celery -A celery_worker.celery worker --loglevel=info
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: CLOUDAMQP_URL
+        fromService:
+          name: rabbitmq
+          type: pserv
+          property: connectionString
+
+  # RabbitMQ service
+  - type: pserv
+    name: rabbitmq
+    plan: free
+    repo: https://github.com/render-examples/rabbitmq
+    env: docker

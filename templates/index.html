@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART COACH</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <div class="glass-card left-column">
+                <h1>SMART COACH</h1>
+
+                <div class="section-card">
+                    <form id="upload-form" enctype="multipart/form-data">
+                        <div class="upload-container">
+                            <div class="file-upload-area" id="file-drop-area">
+                                <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                                <div class="file-upload-text">
+                                    <p>Drag and drop your video file here</p>
+                                    <p>or</p>
+                                </div>
+                                <span class="choose-file-btn">Choose File</span>
+                                <div class="file-name-display" id="file-name"></div>
+                                <input type="file" class="custom-file-input" id="video-file" name="video" accept=".mp4,.avi,.mov,.mkv" required>
+                            </div>
+                            <button type="submit" class="upload-btn">Upload & Process</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="section-card" id="status-area">
+                    <h2>Processing Status</h2>
+                    <div class="status-container">
+                        <div id="status-icon" class="status-icon" style="display: none;"></div>
+                        <div class="status-text">
+                            <span id="status-stage" class="status-stage">Ready</span>
+                            <span id="status-message" class="status-details">Upload a video to start.</span>
+                            <span id="eta-display" class="eta-display" style="display: none;"></span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <progress id="progress-bar" value="0" max="100" style="display: none;"></progress>
+                    </div>
+                    
+                    <div class="processing-steps" id="processing-steps">
+                        <div class="step" data-step="upload">
+                            <span>1</span>
+                            <div class="step-label">Upload</div>
+                        </div>
+                        <div class="step" data-step="prepare">
+                            <span>2</span>
+                            <div class="step-label">Prepare</div>
+                        </div>
+                        <div class="step" data-step="analyze">
+                            <span>3</span>
+                            <div class="step-label">Analyze</div>
+                        </div>
+                        <div class="step" data-step="process">
+                            <span>4</span>
+                            <div class="step-label">Process</div>
+                        </div>
+                        <div class="step" data-step="complete">
+                            <span>5</span>
+                            <div class="step-label">Complete</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card" id="results-area" style="display: none;">
+                    <h2>Results</h2>
+                    <div id="video-result">
+                        <h3>Processed Video</h3>
+                        <div class="playback-warning" style="background-color: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+                            <p><strong>⚠️ Playback Notice:</strong> If the video doesn't play in your browser, please use the download button below and open with Windows Media Player or VLC for best results.</p>
+                        </div>
+                        <video id="result-video-player" width="100%" controls style="display: none;">
+                            Your browser does not support the video tag.
+                        </video>
+                        <a id="result-video-link" href="#" download class="result-link download-btn" style="display: none;">
+                            <i class="fas fa-download"></i> Download Processed Video
+                        </a>
+                    </div>
+                    <div id="stats-result" class="results-container">
+                        <h3>Analysis Statistics</h3>
+                        <pre id="result-stats-data"></pre>
+                        <a id="result-stats-link" href="#" download class="result-link" style="display: none;">Download Stats (JSON)</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card right-column">
+                <h2>Project Report</h2>
+                <div class="pdf-container">
+                    <object data="{{ url_for('static', filename='docs/project_report.pdf') }}" type="application/pdf" width="100%" height="800px">
+                        <p>It appears your browser doesn't support embedded PDFs. 
+                           <a href="{{ url_for('static', filename='docs/project_report.pdf') }}">Click here to download the PDF</a>.</p>
+                    </object>
+                </div>
+                <a href="{{ url_for('static', filename='docs/project_report.pdf') }}" class="download-btn" download>
+                    <i class="fas fa-download"></i> Download Full Report
+                </a>
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <footer>
+        <p>SMART COACH - AI-Powered Football Analysis</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

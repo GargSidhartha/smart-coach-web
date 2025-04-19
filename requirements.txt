@@ -1,0 +1,37 @@
+# Core Frameworks
+Flask>=2.0
+Celery>=5.0
+
+# WSGI Server (Choose one or both)
+waitress # Good for Windows development/cross-platform
+gunicorn # Required for Heroku deployment
+
+# Messaging Broker (Client library)
+amqp>=5.0 # For RabbitMQ
+kombu>=5.0 # For RabbitMQ
+
+# Video/ML Processing
+onnxruntime # Dependency for rembg/ultralytics
+opencv-python-headless # Use headless unless you need GUI features
+ultralytics # YOLOv8
+supervision # Tracking and utilities
+numpy
+scipy # Often a dependency for tracking/CV tasks
+requests # If your utils need it
+filterpy # Often used in tracking algorithms like Kalman filters
+lap # Linear Assignment Problem solver, often used with trackers
+tqdm # Progress bar used in video_analyzer
+rembg # Background removal (used in get_player_color)
+Pillow # Image handling (dependency for rembg, PIL)
+scikit-learn # For KMeans clustering (used in team_assigner, get_player_color)
+
+# Configuration (optional but good practice)
+python-dotenv # For loading .env files
+
+# Other potential dependencies based on your specific processing script:
+# torch
+# torchvision
+# torchaudio
+# pandas # If used for data handling
+
+# Add any other specific libraries used by your processing/ scripts.
